@@ -9,10 +9,10 @@ import java.util.Set;
 @Entity
 @Table(name = "tool")
 public class Tool {
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private final String title;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private final String link;
 
   @Column(nullable = false)
