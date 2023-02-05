@@ -4,15 +4,14 @@ import com.api.vuttr.persistence.Tool;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
-import org.hibernate.validator.constraints.UniqueElements;
 
-import java.util.List;
+import java.util.Set;
 
 public record ToolDTO(
     @NotBlank String title,
     @URL String link,
     @NotBlank String description,
-    @NotEmpty @UniqueElements List<String> tags,
+    @NotEmpty Set<String> tags,
     Integer id) {
   public static ToolDTO fromEntity(Tool tool) {
     return new ToolDTO(
