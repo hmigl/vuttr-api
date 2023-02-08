@@ -6,6 +6,7 @@ import com.api.vuttr.web.ToolDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,9 @@ public class VuttrService {
     this.repository = repository;
   }
 
-  public ToolDTO registerTool(ToolDTO tool) {
-    return ToolDTO.fromEntity(repository.save(Tool.fromDTO(tool)));
+  public ResponseEntity<ToolDTO> registerTool(ToolDTO tool) {
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body(ToolDTO.fromEntity(repository.save(Tool.fromDTO(tool))));
   }
 
   public ResponseEntity<Page<ToolDTO>> retrieveTools(Pageable pageable) {
