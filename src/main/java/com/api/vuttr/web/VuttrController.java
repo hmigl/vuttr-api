@@ -25,7 +25,11 @@ public class VuttrController {
   }
 
   @GetMapping
-  public ResponseEntity<Page<ToolDTO>> retrieveTools(@PageableDefault Pageable pageable) {
-    return service.retrieveTools(pageable);
+  public ResponseEntity<Page<ToolDTO>> retrieveTools(
+      @RequestParam(value = "tag", required = false) String tag,
+      @PageableDefault Pageable pageable) {
+    return tag == null
+        ? service.retrieveTools(pageable)
+        : service.retrieveToolsByTag(tag, pageable);
   }
 }
