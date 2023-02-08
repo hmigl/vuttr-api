@@ -28,4 +28,9 @@ public class VuttrService {
     List<ToolDTO> tools = repository.findAll(pageable).stream().map(ToolDTO::fromEntity).toList();
     return ResponseEntity.ok(new PageImpl<>(tools, pageable, tools.size()));
   }
+
+  public ResponseEntity<Page<ToolDTO>> retrieveToolsByTag(String tag, Pageable pageable) {
+    List<ToolDTO> tools = repository.findAllByTag(tag).stream().map(ToolDTO::fromEntity).toList();
+    return ResponseEntity.ok(new PageImpl<>(tools, pageable, tools.size()));
+  }
 }
