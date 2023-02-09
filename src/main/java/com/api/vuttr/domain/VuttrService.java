@@ -35,4 +35,12 @@ public class VuttrService {
     List<ToolDTO> tools = repository.findAllByTag(tag).stream().map(ToolDTO::fromEntity).toList();
     return ResponseEntity.ok(new PageImpl<>(tools, pageable, tools.size()));
   }
+
+  public ResponseEntity<Void> deleteToolById(Integer id) {
+    if (repository.existsById(id)) {
+      repository.deleteById(id);
+      return ResponseEntity.noContent().build();
+    }
+    return ResponseEntity.notFound().build();
+  }
 }
