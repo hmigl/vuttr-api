@@ -25,7 +25,7 @@ public class Tool {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  Integer id;
+  private Integer id;
 
   protected Tool() {
     this("", "", "", new HashSet<>());
