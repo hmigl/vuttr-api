@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(VuttrController.class)
@@ -56,7 +56,7 @@ class VuttrControllerTest {
   }
 
   @Test
-  void retrieveTools() throws Exception {
+  void shouldRetrieveTools() throws Exception {
     List<ToolDTO> tools =
         List.of(
             new ToolDTO(
@@ -81,7 +81,7 @@ class VuttrControllerTest {
   }
 
   @Test
-  void retrieveToolsByTag() throws Exception {
+  void shouldRetrieveToolsByTag() throws Exception {
     List<ToolDTO> tools =
         List.of(
             new ToolDTO(
@@ -109,5 +109,11 @@ class VuttrControllerTest {
   }
 
   @Test
-  void deleteToolById() {}
+  void shouldDeleteToolById() throws Exception {
+    given(vuttrService.deleteToolById(anyInt())).willReturn(ResponseEntity.noContent().build());
+
+    mockMvc.perform(delete(URI + "/{id}", 1)).andExpect(status().isNoContent());
+
+    verify(vuttrService, times(1)).deleteToolById(anyInt());
+  }
 }
