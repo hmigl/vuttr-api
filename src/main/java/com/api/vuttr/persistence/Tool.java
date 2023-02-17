@@ -4,6 +4,7 @@ import com.api.vuttr.web.ToolDTO;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -60,5 +61,21 @@ public class Tool {
 
   public Integer getId() {
     return id;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Tool tool = (Tool) o;
+    return title.equals(tool.title)
+        && link.equals(tool.link)
+        && description.equals(tool.description)
+        && tags.equals(tool.tags);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(title, link, description, tags);
   }
 }
