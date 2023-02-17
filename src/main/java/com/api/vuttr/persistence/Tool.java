@@ -31,7 +31,7 @@ public class Tool {
     this("", "", "", new HashSet<>());
   }
 
-  private Tool(String title, String link, String description, Set<String> tags) {
+  protected Tool(String title, String link, String description, Set<String> tags) {
     this.title = title;
     this.link = link;
     this.description = description;
